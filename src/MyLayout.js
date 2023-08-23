@@ -17,9 +17,8 @@ const gridItemStyle = {
   border: "1px solid #000",
   padding: 16,
   boxSizing: "border-box",
-  minWidth:'100px',
-  // width: "calc(100% / 6)",
-  height: "calc(100% / 3)",
+  width: "calc(100% / 2)",
+  height: "160px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -30,32 +29,44 @@ const gridItemStyle = {
 const MyLayout = ({ rows, columns }) => {
   const gridItems = [];
 
-  // Generate the grid items for the table layout
+  // Generating the grid items for the form of table (As per requirement)
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < columns; j++) {
       const gridNumber = i * columns + j + 1;
       gridItems.push(
         <Grid key={gridNumber} item xs={12 / columns} style={gridItemStyle}>
-          <Icon style={topLeftIconStyle}><Person2 /></Icon>
+          <Icon style={topLeftIconStyle}>
+            <Person2 />
+          </Icon>
           <GroupAddOutlined style={centerIconStyle} />
         </Grid>
       );
     }
   }
 
+  const containerWidth = `${columns * (100 / 6)}%`;
+
   return (
-    <Grid
-      container
-      spacing={0}
-      style={{ display: "flex", flexDirection: "row", height: "70vh", minWidth: '170px' }}
+    <div
+      style={{
+        overflowX: "auto",
+        overflowY: "auto",
+        height: "90vh",
+        width: "100%",
+      }}
     >
-      {gridItems}
-    </Grid>
+      <div style={{ width: containerWidth }}>
+        <Grid
+          container
+          spacing={0}
+          style={{ display: "flex", flexDirection: "row" }}
+        >
+          {gridItems}
+        </Grid>
+      </div>
+    </div>
   );
 };
 
 export default MyLayout;
-
-
-
 
